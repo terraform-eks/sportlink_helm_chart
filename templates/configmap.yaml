@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sportlink-config
+  namespace: sportlink
+data:
+  SPRING_DATASOURCE_URL: jdbc:mysql://eks-rds.crc0eaykoih9.ap-northeast-2.rds.amazonaws.com:3306/sportlink?serverTimezone=Asia/Seoul&characterEncoding=UTF-8

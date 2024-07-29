@@ -1,0 +1,75 @@
+#for deployment
+replicaCount: 2
+
+image:
+  repository: 533266985161.dkr.ecr.ap-northeast-2.amazonaws.com/sportlink
+  tag: fdcbe
+  pullPolicy: IfNotPresent
+
+
+env:
+  - name: SPRING_DATASOURCE_URL
+    valueFrom:
+      configMapKeyRef:
+        name: sportlink-config
+        key: SPRING_DATASOURCE_URL
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: sportlink-db-secret
+        key: SPRING_DATASOURCE_USERNAME
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: sportlink-db-secret
+        key: SPRING_DATASOURCE_PASSWORD
+
+
+#for service
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 8080
+  annotations: {}
+
+
+#for Ingress
+ingress:
+  enabled: true
+  annotations:
+    alb.ingress.kubernetes.io/load-balancer-name: my-eks-alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: instance
+  hosts:
+    - host: kangsw.shop
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: sportlink-service
+              port:
+                number: 80
+
+
+#for ServiceAccount
+serviceAccount:
+  create: false
+  name: aws-load-balancer-controller
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::533266985161:role/AWSLoadBalancerControllerIAMRole
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+securityContext: {}
+
+livenessProbe: {}
+readinessProbe: {}
+
+resources: {}
+
+nodeSelector: {}
+affinity: {}
+tolerations: []
