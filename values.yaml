@@ -1,12 +1,9 @@
 #for deployment
 replicaCount: 2
-
 image:
   repository: 533266985161.dkr.ecr.ap-northeast-2.amazonaws.com/sportlink
-  tag: fdcbe
+  tag: db197
   pullPolicy: IfNotPresent
-
-
 env:
   - name: SPRING_DATASOURCE_URL
     valueFrom:
@@ -23,16 +20,12 @@ env:
       secretKeyRef:
         name: sportlink-db-secret
         key: SPRING_DATASOURCE_PASSWORD
-
-
 #for service
 service:
   type: LoadBalancer
   port: 80
   targetPort: 8080
   annotations: {}
-
-
 #for Ingress
 ingress:
   enabled: true
@@ -50,26 +43,19 @@ ingress:
               name: sportlink-service
               port:
                 number: 80
-
-
 #for ServiceAccount
 serviceAccount:
   create: false
   name: aws-load-balancer-controller
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::533266985161:role/AWSLoadBalancerControllerIAMRole
-
 podAnnotations: {}
 podLabels: {}
-
 podSecurityContext: {}
 securityContext: {}
-
 livenessProbe: {}
 readinessProbe: {}
-
 resources: {}
-
 nodeSelector: {}
 affinity: {}
 tolerations: []
