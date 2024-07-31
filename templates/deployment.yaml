@@ -20,7 +20,13 @@ spec:
         - containerPort: {{ .Values.service.targetPort }}
         command: ["java"]
         args: ["-jar", "/app/application.jar"]
-
+        resources:
+          requests:
+            memory: "250Mi"
+            cpu: "100m"
+          limits:
+            memory: "400Mi"
+            cpu: "500m"
         env:
           - name: SPRING_DATASOURCE_URL
             valueFrom:
@@ -37,16 +43,17 @@ spec:
               secretKeyRef:
                 name: sportlink-db-secret
                 key: SPRING_DATASOURCE_PASSWORD
-      readinessProbe:
+
+        readinessProbe:
           httpGet:
-            path: /health
+            path: /
             port: {{ .Values.service.targetPort }}
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          
+          initialDelaySeconds: 100
+          periodSeconds: 100
+
         livenessProbe:
           httpGet:
-            path: /health
+            path: /
             port: {{ .Values.service.targetPort }}
-          initialDelaySeconds: 30
-          periodSeconds: 30
+          initialDelaySeconds: 100
+          periodSeconds: 100
