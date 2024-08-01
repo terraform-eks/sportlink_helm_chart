@@ -2,7 +2,7 @@
 replicaCount: 2
 image:
   repository: 533266985161.dkr.ecr.ap-northeast-2.amazonaws.com/sportlink
-  tag: db197
+  tag: 1e9d1
   pullPolicy: IfNotPresent
 env:
   - name: SPRING_DATASOURCE_URL
