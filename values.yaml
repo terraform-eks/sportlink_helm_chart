@@ -20,6 +20,12 @@ env:
       secretKeyRef:
         name: sportlink-db-secret
         key: SPRING_DATASOURCE_PASSWORD
+  - name: REDIS_HOST
+    valueFrom:
+      configMapKeyRef:
+        name: sportlink-config
+        key: REDIS_HOST
+
 #for service
 service:
   type: LoadBalancer
