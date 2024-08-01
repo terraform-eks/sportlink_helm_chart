@@ -45,9 +45,9 @@ spec:
                 key: SPRING_DATASOURCE_PASSWORD
           - name: REDIS_HOST
             valueFrom:
-            configMapKeyRef:
-              name: sportlink-config
-              key: REDIS_HOST
+              configMapKeyRef:
+                name: sportlink-config
+                key: REDIS_HOST
 
         readinessProbe:
           httpGet:
