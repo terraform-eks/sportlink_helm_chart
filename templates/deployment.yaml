@@ -5,6 +5,7 @@ metadata:
   namespace: sportlink
 spec:
   replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: sportlink 
