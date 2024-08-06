@@ -5,4 +5,4 @@ metadata:
   namespace: sportlink
 data:
   SPRING_DATASOURCE_URL: jdbc:mysql://sportlink-rds.crc0eaykoih9.ap-northeast-2.rds.amazonaws.com:3306/sportlink?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-  REDIS_HOST: sportlink.69xcai.ng.0001.apn2.cache.amazonaws.com
+  REDIS_HOST: redis.69xcai.ng.0001.apn2.cache.amazonaws.com
