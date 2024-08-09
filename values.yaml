@@ -1,5 +1,5 @@
 #for deployment
-replicaCount: 4
+replicaCount: 5
 image:
   repository: 533266985161.dkr.ecr.ap-northeast-2.amazonaws.com/sportlink
   tag: 2e5d0
